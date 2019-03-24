@@ -11,7 +11,7 @@ app.use(express.static('build'))
 app.use(bodyParser.json())
 app.use(cors())
 
-morgan.token('body', (req, res) => Object.keys(req.body).length > 0 ? JSON.stringify(req.body) : "")
+morgan.token('body', (req) => Object.keys(req.body).length > 0 ? JSON.stringify(req.body) : "")
 // tiny on :method :url :status :res[content-length] - :response-time ms
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms :body'))
 
@@ -26,10 +26,7 @@ app.get('/api/persons/:id', (req, res, next) => {
 })
 app.put('/api/persons/:id', (req, res, next) => {
     const body = req.body
-    const person = {
-        name: body.name,
-        number: body.number
-    }
+
     Person.findByIdAndUpdate(req.params.id, { number: body.number }, { new: true })
         .then(updatedPerson => {
             if (updatedPerson) {
@@ -40,7 +37,7 @@ app.put('/api/persons/:id', (req, res, next) => {
         }).catch(err => next(err))
 })
 app.delete('/api/persons/:id', (req, res, next) => {
-    Person.findByIdAndRemove(req.params.id).then(result => {
+    Person.findByIdAndRemove(req.params.id).then(() => {
         res.status(204).end()
     }).catch(err => next(err))
 })
@@ -81,7 +78,7 @@ app.use(unknownEndpoint)
 const errorHandler = (error, request, response, next) => {
     console.error(error.message)
 
-    if (error.name === 'CastError' && error.kind == 'ObjectId') {
+    if (error.name === 'CastError' && error.kind === 'ObjectId') {
         return response.status(400).send({ error: 'malformatted id' })
     } else if (error.name === 'ValidationError') {
         return response.status(400).json({ error: error.message })
