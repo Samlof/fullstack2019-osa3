@@ -2,11 +2,12 @@ const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
 const morgan = require('morgan')
+const cors = require('cors')
 
 app.use(bodyParser.json())
+app.use(cors())
 
-
-morgan.token('body', (req, res) => Object.keys(req.body).length > 0 ? JSON.stringify(req.body) : " ")
+morgan.token('body', (req, res) => Object.keys(req.body).length > 0 ? JSON.stringify(req.body) : "")
 // tiny on :method :url :status :res[content-length] - :response-time ms
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms :body'))
 
@@ -80,7 +81,7 @@ app.get('/info', (req, res) => {
         + '<p>' + (new Date) + "</p>")
 })
 
-const PORT = 3001
+const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
 })
