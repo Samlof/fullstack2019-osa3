@@ -20,6 +20,7 @@
   "homepage": "https://github.com/Samlof/fullstack2019-osa3#readme",
   "dependencies": {
     "cors": "^2.8.5",
+    "dotenv": "^7.0.0",
     "express": "^4.16.4",
     "mongoose": "^5.4.19",
     "morgan": "^1.9.1"
