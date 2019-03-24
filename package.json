@@ -1,0 +1,19 @@
+{
+  "name": "fullstack2019-osa3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Samlof/fullstack2019-osa3.git"
+  },
+  "author": "Samuli",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Samlof/fullstack2019-osa3/issues"
+  },
+  "homepage": "https://github.com/Samlof/fullstack2019-osa3#readme"
+}
